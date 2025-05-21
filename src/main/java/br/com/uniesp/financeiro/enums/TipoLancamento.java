@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.Enums;
+package br.com.uniesp.financeiro.enums;
 
 public enum TipoLancamento {
     RECEITA,

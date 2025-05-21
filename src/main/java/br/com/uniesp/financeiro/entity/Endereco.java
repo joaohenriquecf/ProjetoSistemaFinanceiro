@@ -1,6 +1,6 @@
 package br.com.uniesp.financeiro.entity;
 
-import br.com.uniesp.financeiro.domain.DadosEndereco;
+import br.com.uniesp.financeiro.domain.Endereco.DadosEndereco;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +26,31 @@ public class Endereco {
         this.bairro = dadosEndereco.bairro();
         this.CEP = dadosEndereco.CEP();
         this.cidade = dadosEndereco.cidade();
-        this.estado = dadosEndereco.cidade();
+        this.estado = dadosEndereco.estado();
     }
 
 
+    public void atualizarInformacoes(DadosEndereco dadosEndereco) {
+        if(dadosEndereco.logradouro() != null){
+            this.logradouro = dadosEndereco.logradouro();
+        }
+        if(dadosEndereco.numero() != null){
+            this.numero = dadosEndereco.numero();
+        }
+        if (dadosEndereco.complemento() != null){
+            this.complemento = dadosEndereco.complemento();
+        }
+        if (dadosEndereco.bairro() != null){
+            this.bairro = dadosEndereco.bairro();
+        }
+        if (dadosEndereco.CEP() != null){
+            this.CEP = dadosEndereco.CEP();
+        }
+        if (dadosEndereco.cidade() != null){
+            this.cidade = dadosEndereco.cidade();
+        }
+        if (dadosEndereco.estado() != null){
+            this.estado = dadosEndereco.estado();
+        }
+    }
 }

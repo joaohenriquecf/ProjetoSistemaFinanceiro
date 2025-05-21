@@ -1,13 +1,15 @@
 package br.com.uniesp.financeiro.entity;
 
-import br.com.uniesp.financeiro.domain.DadosCadastroPessoa;
-import br.com.uniesp.financeiro.domain.DadosEndereco;
+import br.com.uniesp.financeiro.domain.Endereco.DadosEndereco;
+import br.com.uniesp.financeiro.domain.Pessoa.DadosAtualizacaoPessoa;
+import br.com.uniesp.financeiro.domain.Pessoa.DadosCadastroPessoa;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table (name = "pessoas")
+@Table (name = "Tb_pessoas")
 @Entity(name = "Pessoa")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,11 +26,10 @@ public class Pessoa {
     private Endereco endereco;
     private Lancamento lancamento;
 
-    public Pessoa(DadosCadastroPessoa dados){
-        this.ativo = true;
-        this.nome = nome;
-        this.endereco = new Endereco();
-        this.lancamento = lancamento;
+    public Pessoa(@Valid DadosCadastroPessoa dados) {
+         this.nome = dados.nome();
+         this.ativo = true;
+         this.endereco = new Endereco(dados.endereco());
     }
 
     public Long getId() {
@@ -49,5 +50,21 @@ public class Pessoa {
 
     public Lancamento getLancamento() {
         return lancamento;
+    }
+
+    public void atualizarInformacoes(DadosAtualizacaoPessoa dados) {
+        if(dados.nome() != null){
+            this.nome = dados.nome();
+        }
+        if (dados.ativo() != null){
+            this.ativo = dados.ativo();
+        }
+        if (dados.endereco() != null){
+            this.endereco.atualizarInformacoes(dados.endereco());
+        }
+    }
+
+    public void deletar() {
+        this.ativo = false;
     }
 }
