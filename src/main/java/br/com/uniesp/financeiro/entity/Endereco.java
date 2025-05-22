@@ -1,6 +1,7 @@
 package br.com.uniesp.financeiro.entity;
 
-import br.com.uniesp.financeiro.domain.Endereco.DadosEndereco;
+import br.com.uniesp.financeiro.domain.Endereco.DadosAtualizacaoEndereco;
+import br.com.uniesp.financeiro.domain.Endereco.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,14 +20,24 @@ public class Endereco {
     private String cidade;
     private String estado;
 
-    public Endereco(DadosEndereco dadosEndereco) {
-        this.logradouro = dadosEndereco.logradouro();
-        this.numero = dadosEndereco.numero();
-        this.complemento = dadosEndereco.complemento();
-        this.bairro = dadosEndereco.bairro();
-        this.CEP = dadosEndereco.CEP();
-        this.cidade = dadosEndereco.cidade();
-        this.estado = dadosEndereco.estado();
+    public Endereco(DadosCadastroEndereco dadosCadastroEndereco) {
+        this.logradouro = dadosCadastroEndereco.logradouro();
+        this.numero = dadosCadastroEndereco.numero();
+        this.complemento = dadosCadastroEndereco.complemento();
+        this.bairro = dadosCadastroEndereco.bairro();
+        this.CEP = dadosCadastroEndereco.CEP();
+        this.cidade = dadosCadastroEndereco.cidade();
+        this.estado = dadosCadastroEndereco.estado();
+    }
+
+    public Endereco(DadosAtualizacaoEndereco dadosAtualizacaoEndereco) {
+        this.logradouro = dadosAtualizacaoEndereco.logradouro();
+        this.numero = dadosAtualizacaoEndereco.numero();
+        this.complemento = dadosAtualizacaoEndereco.complemento();
+        this.bairro = dadosAtualizacaoEndereco.bairro();
+        this.CEP = dadosAtualizacaoEndereco.CEP();
+        this.cidade = dadosAtualizacaoEndereco.cidade();
+        this.estado = dadosAtualizacaoEndereco.estado();
     }
 
     public String getLogradouro() {
@@ -57,27 +68,27 @@ public class Endereco {
         return estado;
     }
 
-    public void atualizarInformacoes(DadosEndereco dadosEndereco) {
-        if(dadosEndereco.logradouro() != null){
-            this.logradouro = dadosEndereco.logradouro();
+    public void atualizarInformacoes(DadosAtualizacaoEndereco dadosAtualizacaoEndereco) {
+        if(dadosAtualizacaoEndereco.logradouro() != null){
+            this.logradouro = dadosAtualizacaoEndereco.logradouro();
         }
-        if(dadosEndereco.numero() != null){
-            this.numero = dadosEndereco.numero();
+        if(dadosAtualizacaoEndereco.numero() != null){
+            this.numero = dadosAtualizacaoEndereco.numero();
         }
-        if (dadosEndereco.complemento() != null){
-            this.complemento = dadosEndereco.complemento();
+        if (dadosAtualizacaoEndereco.complemento() != null){
+            this.complemento = dadosAtualizacaoEndereco.complemento();
         }
-        if (dadosEndereco.bairro() != null){
-            this.bairro = dadosEndereco.bairro();
+        if (dadosAtualizacaoEndereco.bairro() != null){
+            this.bairro = dadosAtualizacaoEndereco.bairro();
         }
-        if (dadosEndereco.CEP() != null){
-            this.CEP = dadosEndereco.CEP();
+        if (dadosAtualizacaoEndereco.CEP() != null){
+            this.CEP = dadosAtualizacaoEndereco.CEP();
         }
-        if (dadosEndereco.cidade() != null){
-            this.cidade = dadosEndereco.cidade();
+        if (dadosAtualizacaoEndereco.cidade() != null){
+            this.cidade = dadosAtualizacaoEndereco.cidade();
         }
-        if (dadosEndereco.estado() != null){
-            this.estado = dadosEndereco.estado();
+        if (dadosAtualizacaoEndereco.estado() != null){
+            this.estado = dadosAtualizacaoEndereco.estado();
         }
     }
 }

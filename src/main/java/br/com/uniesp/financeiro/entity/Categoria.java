@@ -2,6 +2,7 @@ package br.com.uniesp.financeiro.entity;
 
 import br.com.uniesp.financeiro.domain.Categoria.DadosAtualizacaoCategoria;
 import br.com.uniesp.financeiro.domain.Categoria.DadosCadastroCategoria;
+import br.com.uniesp.financeiro.domain.Categoria.DadosVinculoCategoria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -24,9 +25,13 @@ public class Categoria {
 
     private boolean ativo;
 
-    public Categoria(DadosCadastroCategoria dados){
-        this.nome = dados.nome();
-        this.ativo = dados.ativo();
+    public Categoria(DadosCadastroCategoria dadosCadastroCategoria){
+        this.nome = dadosCadastroCategoria.nome();
+        this.ativo = dadosCadastroCategoria.ativo();
+    }
+
+    public Categoria(DadosVinculoCategoria dadosVinculoCategoria){
+        this.id = dadosVinculoCategoria.id();
     }
 
     public String getNome() {

@@ -8,7 +8,6 @@ import br.com.uniesp.financeiro.entity.Pessoa;
 import br.com.uniesp.financeiro.repository.PessoaRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

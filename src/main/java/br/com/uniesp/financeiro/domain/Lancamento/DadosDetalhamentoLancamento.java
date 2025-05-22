@@ -1,8 +1,6 @@
 package br.com.uniesp.financeiro.domain.Lancamento;
 
-import br.com.uniesp.financeiro.domain.Pessoa.DadosDetalhamentoPessoa;
 import br.com.uniesp.financeiro.entity.Lancamento;
-import br.com.uniesp.financeiro.entity.Pessoa;
 import br.com.uniesp.financeiro.enums.TipoLancamento;
 
 import java.math.BigDecimal;

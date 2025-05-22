@@ -1,7 +1,7 @@
 package br.com.uniesp.financeiro.domain.Lancamento;
 
-import br.com.uniesp.financeiro.entity.Categoria;
-import br.com.uniesp.financeiro.entity.Pessoa;
+import br.com.uniesp.financeiro.domain.Categoria.DadosVinculoCategoria;
+import br.com.uniesp.financeiro.domain.Pessoa.DadosVinculoPessoa;
 import br.com.uniesp.financeiro.enums.TipoLancamento;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,12 +17,12 @@ public record DadosCadastroLancamento(
         Date dataPagamento,
         @NotNull
         BigDecimal valor,
-        @NotNull
         Boolean ativo,
         String observacao,
+        @NotNull
         TipoLancamento tipoLancamento,
         @NotNull
-        Categoria IDcategoria,
+        DadosVinculoCategoria categoria,
         @NotNull
-        Pessoa IDpessoa) {
+        DadosVinculoPessoa pessoa) {
 }

@@ -5,7 +5,9 @@ import br.com.uniesp.financeiro.domain.Lancamento.DadosCadastroLancamento;
 import br.com.uniesp.financeiro.domain.Lancamento.DadosDetalhamentoLancamento;
 import br.com.uniesp.financeiro.domain.Lancamento.DadosListagemLancamento;
 import br.com.uniesp.financeiro.entity.Lancamento;
+import br.com.uniesp.financeiro.repository.CategoriaRespository;
 import br.com.uniesp.financeiro.repository.LancamentosRepository;
+import br.com.uniesp.financeiro.repository.PessoaRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class LancamentoController {
 
     @Autowired
+    PessoaRepository pessoaRepository;
+
+    @Autowired
+    CategoriaRespository categoriaRespository;
+
+    @Autowired
     private LancamentosRepository lancamentosRepository;
 
     @PostMapping
     @Transactional
-    public ResponseEntity Cadastrar(@RequestBody @Valid DadosCadastroLancamento dados, UriComponentsBuilder uriBuilder){
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroLancamento dados, UriComponentsBuilder uriBuilder){
         var lancamento = new Lancamento(dados);
+
         lancamentosRepository.save(lancamento);
         var uri = uriBuilder.path("/lancamentos/{id}").buildAndExpand(lancamento.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoLancamento(lancamento));

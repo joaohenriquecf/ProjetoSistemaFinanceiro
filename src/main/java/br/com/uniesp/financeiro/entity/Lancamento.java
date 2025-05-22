@@ -4,8 +4,6 @@ import br.com.uniesp.financeiro.domain.Lancamento.DadosAtualizacaoLancamento;
 import br.com.uniesp.financeiro.domain.Lancamento.DadosCadastroLancamento;
 import br.com.uniesp.financeiro.enums.TipoLancamento;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -48,8 +46,8 @@ public class Lancamento {
         this.observacao = dados.observacao();
         this.tipoLancamento = dados.tipoLancamento();
         this.ativo = dados.ativo();
-        this.pessoa = dados.IDpessoa();
-        this.categoria = dados.IDcategoria();
+        this.pessoa = new Pessoa(dados.pessoa());
+        this.categoria = new Categoria(dados.categoria());
     }
 
     public Long getId() {
