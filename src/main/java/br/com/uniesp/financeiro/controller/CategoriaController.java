@@ -1,5 +1,6 @@
 package br.com.uniesp.financeiro.controller;
 
+import br.com.uniesp.financeiro.domain.Categoria.DadosAtualizacaoCategoria;
 import br.com.uniesp.financeiro.domain.Categoria.DadosCadastroCategoria;
 import br.com.uniesp.financeiro.domain.Categoria.DadosDetalhamentoCategoria;
 import br.com.uniesp.financeiro.domain.Categoria.DadosListagemCategoria;
@@ -12,8 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,27 @@ public class CategoriaController {
     public ResponseEntity<Page<DadosListagemCategoria>> listar(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao){
         var page = categoriaRespository.findAllByAtivoTrue(paginacao).map(DadosListagemCategoria::new);
         return ResponseEntity.ok(page);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaoCategoria dados){
+        var categoria = categoriaRespository.getReferenceById((id));
+        categoria.atualizarInformacoes(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoCategoria(categoria));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletar(@PathVariable Long id){
+        var categoria = categoriaRespository.getReferenceById(id);
+        categoria.deletar();
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id){
+        var categoria = categoriaRespository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoCategoria(categoria));
     }
 
 }

@@ -5,5 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroCategoria(
         @NotBlank
-        String nome) {
+        String nome,
+        @NotNull
+        Boolean ativo) {
 }

@@ -1,17 +1,23 @@
 package br.com.uniesp.financeiro.entity;
 
+import br.com.uniesp.financeiro.domain.Lancamento.DadosAtualizacaoLancamento;
+import br.com.uniesp.financeiro.domain.Lancamento.DadosCadastroLancamento;
 import br.com.uniesp.financeiro.enums.TipoLancamento;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Table(name = "Tb_lançamento")
+@Table(name = "lancamentos")
 @Entity(name = "Lancamento")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Lancamento {
 
     @Id
@@ -24,6 +30,7 @@ public class Lancamento {
     private String observacao;
     @Enumerated(EnumType.STRING)
     private TipoLancamento tipoLancamento;
+    private Boolean ativo;
 
     @ManyToOne
     @JoinColumn(name = "id_pessoa")
@@ -33,15 +40,23 @@ public class Lancamento {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
-    public Lancamento(String descricao, Date dataVencimento, Date dataPagamento, BigDecimal valor, String observacao) {
-        this.descricao = descricao;
-        this.dataVencimento = dataVencimento;
-        this.dataPagamento = dataPagamento;
-        this.valor = valor;
-        this.observacao = observacao;
+    public Lancamento(DadosCadastroLancamento dados) {
+        this.descricao = dados.descricao();
+        this.dataVencimento = dados.dataVencimento();
+        this.dataPagamento = dados.dataPagamento();
+        this.valor = dados.valor();
+        this.observacao = dados.observacao();
+        this.tipoLancamento = dados.tipoLancamento();
+        this.ativo = dados.ativo();
+        this.pessoa = dados.IDpessoa();
+        this.categoria = dados.IDcategoria();
     }
 
-    public String getDescricao(){
+    public Long getId() {
+        return id;
+    }
+
+    public String getDescricao() {
         return descricao;
     }
 
@@ -65,7 +80,38 @@ public class Lancamento {
         return tipoLancamento;
     }
 
-    public Long getId() {
-        return id;
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void atualizarInformacoes(DadosAtualizacaoLancamento dados){
+        if (dados.descricao() != null){
+            this.descricao = dados.descricao();
+        }
+        if(dados.dataVencimento() != null){
+            this.dataVencimento = dados.dataVencimento();
+        }
+        if(dados.dataPagamento() != null){
+            this.dataPagamento = dados.dataPagamento();
+        }
+        if (dados.valor() != null){
+            this.valor = dados.valor();
+        }
+        if(dados.observacao() != null){
+            this.observacao = dados.observacao();
+        }
+
+    }
+
+    public void deletar(){
+        this.ativo = false;
     }
 }

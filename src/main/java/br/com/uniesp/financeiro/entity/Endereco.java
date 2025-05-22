@@ -29,6 +29,33 @@ public class Endereco {
         this.estado = dadosEndereco.estado();
     }
 
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getCEP() {
+        return CEP;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
 
     public void atualizarInformacoes(DadosEndereco dadosEndereco) {
         if(dadosEndereco.logradouro() != null){

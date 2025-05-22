@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 public record DadosCadastroPessoa(
         @NotBlank
         String nome,
-        @NotBlank
+        @NotNull
         Boolean ativo,
         @NotNull @Valid
         DadosEndereco endereco

@@ -26,6 +26,7 @@ public class PessoaController {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+
     @PostMapping
     @Transactional
     public ResponseEntity Cadastrar(@RequestBody @Valid DadosCadastroPessoa dados, UriComponentsBuilder uriBuilder){
@@ -35,19 +36,22 @@ public class PessoaController {
         return ResponseEntity.created(uri).body(new DadosDetalhamentoPessoa(pessoa));
     }
 
+
     @GetMapping
     public ResponseEntity<Page<DadosListagemPessoa>> Listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
         var page = pessoaRepository.findAllByAtivoTrue(paginacao).map(DadosListagemPessoa::new);
         return ResponseEntity.ok(page);
     }
 
-    @PutMapping
+
+    @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity Atualizar(@RequestBody @Valid DadosAtualizacaoPessoa dados){
-        var pessoa = pessoaRepository.getReferenceById(dados.id());
+    public ResponseEntity Atualizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaoPessoa dados){
+        var pessoa = pessoaRepository.getReferenceById((id));
         pessoa.atualizarInformacoes(dados);
         return ResponseEntity.ok(new DadosDetalhamentoPessoa(pessoa));
     }
+
 
     @DeleteMapping("/{id}")
     @Transactional
@@ -56,6 +60,7 @@ public class PessoaController {
         pessoa.deletar();
         return ResponseEntity.noContent().build();
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id) {

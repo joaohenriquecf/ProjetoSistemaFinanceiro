@@ -6,14 +6,16 @@ import br.com.uniesp.financeiro.domain.Pessoa.DadosCadastroPessoa;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table (name = "Tb_pessoas")
+@Table (name = "pessoas")
 @Entity(name = "Pessoa")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@EqualsAndHashCode(of = "id")
 public class Pessoa {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,6 @@ public class Pessoa {
     private Boolean ativo;
     @Embedded
     private Endereco endereco;
-    private Lancamento lancamento;
 
     public Pessoa(@Valid DadosCadastroPessoa dados) {
          this.nome = dados.nome();
@@ -48,9 +49,6 @@ public class Pessoa {
         return endereco;
     }
 
-    public Lancamento getLancamento() {
-        return lancamento;
-    }
 
     public void atualizarInformacoes(DadosAtualizacaoPessoa dados) {
         if(dados.nome() != null){
