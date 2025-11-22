@@ -1,7 +1,7 @@
-package br.com.uniesp.financeiro.domain.Lancamento;
+package br.com.uniesp.financeiro.dto.request.lancamento;
 
-import br.com.uniesp.financeiro.domain.Categoria.DadosVinculoCategoria;
-import br.com.uniesp.financeiro.domain.Pessoa.DadosVinculoPessoa;
+import br.com.uniesp.financeiro.dto.request.categoria.DadosVinculoCategoria;
+import br.com.uniesp.financeiro.dto.request.pessoa.DadosVinculoPessoa;
 import br.com.uniesp.financeiro.enums.TipoLancamento;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

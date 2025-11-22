@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.domain.Categoria;
+package br.com.uniesp.financeiro.dto.request.categoria;
 
 public record DadosAtualizacaoCategoria(
         String nome,

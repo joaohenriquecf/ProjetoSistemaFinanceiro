@@ -1,9 +1,9 @@
 package br.com.uniesp.financeiro.controller;
 
-import br.com.uniesp.financeiro.domain.Categoria.DadosAtualizacaoCategoria;
-import br.com.uniesp.financeiro.domain.Categoria.DadosCadastroCategoria;
-import br.com.uniesp.financeiro.domain.Categoria.DadosDetalhamentoCategoria;
-import br.com.uniesp.financeiro.domain.Categoria.DadosListagemCategoria;
+import br.com.uniesp.financeiro.dto.request.categoria.DadosAtualizacaoCategoria;
+import br.com.uniesp.financeiro.dto.request.categoria.DadosCadastroCategoria;
+import br.com.uniesp.financeiro.dto.response.categoria.DadosDetalhamentoCategoria;
+import br.com.uniesp.financeiro.dto.response.categoria.DadosListagemCategoria;
 import br.com.uniesp.financeiro.entity.Categoria;
 import br.com.uniesp.financeiro.repository.CategoriaRespository;
 import jakarta.transaction.Transactional;

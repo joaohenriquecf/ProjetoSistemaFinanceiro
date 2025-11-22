@@ -1,7 +1,7 @@
 package br.com.uniesp.financeiro.entity;
 
-import br.com.uniesp.financeiro.domain.Lancamento.DadosAtualizacaoLancamento;
-import br.com.uniesp.financeiro.domain.Lancamento.DadosCadastroLancamento;
+import br.com.uniesp.financeiro.dto.request.lancamento.DadosAtualizacaoLancamento;
+import br.com.uniesp.financeiro.dto.request.lancamento.DadosCadastroLancamento;
 import br.com.uniesp.financeiro.enums.TipoLancamento;
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,9 +1,9 @@
 package br.com.uniesp.financeiro.controller;
 
-import br.com.uniesp.financeiro.domain.Pessoa.DadosAtualizacaoPessoa;
-import br.com.uniesp.financeiro.domain.Pessoa.DadosCadastroPessoa;
-import br.com.uniesp.financeiro.domain.Pessoa.DadosDetalhamentoPessoa;
-import br.com.uniesp.financeiro.domain.Pessoa.DadosListagemPessoa;
+import br.com.uniesp.financeiro.dto.request.pessoa.DadosAtualizacaoPessoa;
+import br.com.uniesp.financeiro.dto.request.pessoa.DadosCadastroPessoa;
+import br.com.uniesp.financeiro.dto.response.pessoa.DadosDetalhamentoPessoa;
+import br.com.uniesp.financeiro.dto.response.pessoa.DadosListagemPessoa;
 import br.com.uniesp.financeiro.entity.Pessoa;
 import br.com.uniesp.financeiro.repository.PessoaRepository;
 import jakarta.transaction.Transactional;
@@ -15,8 +15,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("pessoas")

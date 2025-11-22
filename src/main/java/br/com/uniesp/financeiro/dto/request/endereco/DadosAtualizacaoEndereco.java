@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.domain.Endereco;
+package br.com.uniesp.financeiro.dto.request.endereco;
 
 import jakarta.validation.constraints.Pattern;
 

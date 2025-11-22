@@ -1,9 +1,9 @@
 package br.com.uniesp.financeiro.controller;
 
-import br.com.uniesp.financeiro.domain.Lancamento.DadosAtualizacaoLancamento;
-import br.com.uniesp.financeiro.domain.Lancamento.DadosCadastroLancamento;
-import br.com.uniesp.financeiro.domain.Lancamento.DadosDetalhamentoLancamento;
-import br.com.uniesp.financeiro.domain.Lancamento.DadosListagemLancamento;
+import br.com.uniesp.financeiro.dto.request.lancamento.DadosAtualizacaoLancamento;
+import br.com.uniesp.financeiro.dto.request.lancamento.DadosCadastroLancamento;
+import br.com.uniesp.financeiro.dto.response.lancamento.DadosDetalhamentoLancamento;
+import br.com.uniesp.financeiro.dto.response.lancamento.DadosListagemLancamento;
 import br.com.uniesp.financeiro.entity.Lancamento;
 import br.com.uniesp.financeiro.repository.CategoriaRespository;
 import br.com.uniesp.financeiro.repository.LancamentosRepository;

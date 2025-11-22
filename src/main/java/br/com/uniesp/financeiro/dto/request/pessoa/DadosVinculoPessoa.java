@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.domain.Pessoa;
+package br.com.uniesp.financeiro.dto.request.pessoa;
 
 import jakarta.validation.constraints.NotBlank;
 

@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.infra;
+package br.com.uniesp.financeiro.infra.exception;
 
 import org.springframework.validation.FieldError;
 

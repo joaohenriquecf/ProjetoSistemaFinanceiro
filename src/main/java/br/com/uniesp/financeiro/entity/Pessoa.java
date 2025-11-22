@@ -1,8 +1,8 @@
 package br.com.uniesp.financeiro.entity;
 
-import br.com.uniesp.financeiro.domain.Pessoa.DadosAtualizacaoPessoa;
-import br.com.uniesp.financeiro.domain.Pessoa.DadosCadastroPessoa;
-import br.com.uniesp.financeiro.domain.Pessoa.DadosVinculoPessoa;
+import br.com.uniesp.financeiro.dto.request.pessoa.DadosAtualizacaoPessoa;
+import br.com.uniesp.financeiro.dto.request.pessoa.DadosCadastroPessoa;
+import br.com.uniesp.financeiro.dto.request.pessoa.DadosVinculoPessoa;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -51,7 +51,7 @@ public class Pessoa {
         return ativo;
     }
 
-    public Endereco getEndereco() {
+    public Endereco getEndereco()    {
         return endereco;
     }
 

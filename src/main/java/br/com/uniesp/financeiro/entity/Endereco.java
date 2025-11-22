@@ -1,7 +1,7 @@
 package br.com.uniesp.financeiro.entity;
 
-import br.com.uniesp.financeiro.domain.Endereco.DadosAtualizacaoEndereco;
-import br.com.uniesp.financeiro.domain.Endereco.DadosCadastroEndereco;
+import br.com.uniesp.financeiro.dto.request.endereco.DadosAtualizacaoEndereco;
+import br.com.uniesp.financeiro.dto.request.endereco.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

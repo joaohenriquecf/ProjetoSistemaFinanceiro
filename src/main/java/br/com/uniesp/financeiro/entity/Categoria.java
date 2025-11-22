@@ -1,8 +1,8 @@
 package br.com.uniesp.financeiro.entity;
 
-import br.com.uniesp.financeiro.domain.Categoria.DadosAtualizacaoCategoria;
-import br.com.uniesp.financeiro.domain.Categoria.DadosCadastroCategoria;
-import br.com.uniesp.financeiro.domain.Categoria.DadosVinculoCategoria;
+import br.com.uniesp.financeiro.dto.request.categoria.DadosAtualizacaoCategoria;
+import br.com.uniesp.financeiro.dto.request.categoria.DadosCadastroCategoria;
+import br.com.uniesp.financeiro.dto.request.categoria.DadosVinculoCategoria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

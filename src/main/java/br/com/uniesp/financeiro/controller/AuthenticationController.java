@@ -1,0 +1,38 @@
+package br.com.uniesp.financeiro.controller;
+
+import br.com.uniesp.financeiro.dto.request.usuario.DadosTokenJWT;
+import br.com.uniesp.financeiro.dto.request.usuario.DadosAuthentication;
+import br.com.uniesp.financeiro.entity.Usuario;
+import br.com.uniesp.financeiro.infra.security.TokenService;
+import br.com.uniesp.financeiro.repository.UsuarioRepository;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/login")
+public class AuthenticationController {
+
+    @Autowired
+    private TokenService tokenService;
+
+    @Autowired
+    private AuthenticationManager manager;
+
+    @Autowired
+    private UsuarioRepository repository;
+
+    @PostMapping
+    public ResponseEntity realizarLogin(@RequestBody @Valid DadosAuthentication dados){
+        var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+        var authentication = manager.authenticate(token);
+        var tokenJWT = tokenService.gerarToken((Usuario)authentication.getPrincipal())
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
+    }
+
+
+
+}

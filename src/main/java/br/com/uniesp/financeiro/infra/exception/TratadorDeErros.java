@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.infra;
+package br.com.uniesp.financeiro.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;

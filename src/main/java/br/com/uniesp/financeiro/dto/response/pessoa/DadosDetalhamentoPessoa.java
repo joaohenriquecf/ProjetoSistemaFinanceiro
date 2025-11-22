@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.domain.Pessoa;
+package br.com.uniesp.financeiro.dto.response.pessoa;
 
 import br.com.uniesp.financeiro.entity.Endereco;
 import br.com.uniesp.financeiro.entity.Pessoa;

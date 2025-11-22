@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.domain.Lancamento;
+package br.com.uniesp.financeiro.dto.response.lancamento;
 
 import br.com.uniesp.financeiro.entity.Lancamento;
 import br.com.uniesp.financeiro.enums.TipoLancamento;

@@ -1,6 +1,6 @@
-package br.com.uniesp.financeiro.domain.Pessoa;
+package br.com.uniesp.financeiro.dto.request.pessoa;
 
-import br.com.uniesp.financeiro.domain.Endereco.DadosCadastroEndereco;
+import br.com.uniesp.financeiro.dto.request.endereco.DadosCadastroEndereco;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

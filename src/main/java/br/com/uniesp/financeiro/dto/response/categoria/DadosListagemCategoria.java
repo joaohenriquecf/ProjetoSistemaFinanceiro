@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.domain.Categoria;
+package br.com.uniesp.financeiro.dto.response.categoria;
 
 
 import br.com.uniesp.financeiro.entity.Categoria;
