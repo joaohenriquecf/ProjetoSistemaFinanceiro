@@ -6,6 +6,7 @@ import br.com.uniesp.financeiro.dto.response.pessoa.DadosDetalhamentoPessoa;
 import br.com.uniesp.financeiro.dto.response.pessoa.DadosListagemPessoa;
 import br.com.uniesp.financeiro.entity.Pessoa;
 import br.com.uniesp.financeiro.repository.PessoaRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("pessoas")
+@SecurityRequirement(name = "bearer-key")
 public class PessoaController {
 
     @Autowired

@@ -17,19 +17,16 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     @Autowired
-    private TokenService tokenService;
-
-    @Autowired
     private AuthenticationManager manager;
 
     @Autowired
-    private UsuarioRepository repository;
+    private TokenService tokenService;
 
     @PostMapping
     public ResponseEntity realizarLogin(@RequestBody @Valid DadosAuthentication dados){
         var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var authentication = manager.authenticate(token);
-        var tokenJWT = tokenService.gerarToken((Usuario)authentication.getPrincipal())
+        var tokenJWT = tokenService.gerarToken((Usuario)authentication.getPrincipal());
         return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 

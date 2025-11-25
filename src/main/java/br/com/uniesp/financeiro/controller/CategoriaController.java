@@ -6,6 +6,7 @@ import br.com.uniesp.financeiro.dto.response.categoria.DadosDetalhamentoCategori
 import br.com.uniesp.financeiro.dto.response.categoria.DadosListagemCategoria;
 import br.com.uniesp.financeiro.entity.Categoria;
 import br.com.uniesp.financeiro.repository.CategoriaRespository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("categorias")
+@SecurityRequirement(name = "bearer-key")
 public class CategoriaController {
 
     @Autowired

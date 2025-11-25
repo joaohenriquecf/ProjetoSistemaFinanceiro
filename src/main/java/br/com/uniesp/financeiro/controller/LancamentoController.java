@@ -8,6 +8,7 @@ import br.com.uniesp.financeiro.entity.Lancamento;
 import br.com.uniesp.financeiro.repository.CategoriaRespository;
 import br.com.uniesp.financeiro.repository.LancamentosRepository;
 import br.com.uniesp.financeiro.repository.PessoaRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("lancamentos")
+@SecurityRequirement(name = "bearer-key")
 public class LancamentoController {
 
     @Autowired

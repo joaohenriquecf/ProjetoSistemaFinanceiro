@@ -21,7 +21,6 @@ public class TokenService {
     private String secret;
 
     public String gerarToken(Usuario usuario){
-        System.out.println(secret);
         try {
             var algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
@@ -36,14 +35,13 @@ public class TokenService {
 
     public String getSubject(String tokenJWT){
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            var algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
                     .withIssuer("ProjetoSistemaFinanceiro")
                     .build()
                     .verify(tokenJWT)
                     .getSubject();
         } catch (JWTVerificationException exception){
-            exception.printStackTrace();
             throw new RuntimeException("Token JWT inválido ou expirado");
         }
     }
