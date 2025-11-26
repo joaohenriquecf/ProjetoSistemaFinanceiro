@@ -1,8 +1,6 @@
 package br.com.uniesp.financeiro.springDoc;
 
 
-
-
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -26,12 +24,12 @@ public class SpringDocConfigurations {
                                         .bearerFormat("JWT")))
                 .info(new Info()
                         .title("ProjetoSistemaFinanceiro")
-                        .description("API Rest da aplicação Voll.med, contendo as funcionalidades de CRUD de médicos e de pacientes, além de agendamento e cancelamento de consultas")
+                        .description("API Rest da aplicação SistemaFinanceiro, contendo as funcionalidades de CRUD de pessoas, categorias e lancamentos")
                         .contact(new Contact()
                                 .name("Time Backend")
                                 .email("backend@sistema.financeiro"))
                         .license(new License()
                                 .name("Apache 2.0")
-                                .url("http://voll.med/api/licenca")));
+                                .url("http://sistemafinanceiro/api/licenca")));
     }
 }

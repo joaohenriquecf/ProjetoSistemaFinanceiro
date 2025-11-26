@@ -1,4 +1,4 @@
-package br.com.uniesp.financeiro.dto.request.usuario;
+package br.com.uniesp.financeiro.dto.response.usuario;
 
 import br.com.uniesp.financeiro.entity.Usuario;
 

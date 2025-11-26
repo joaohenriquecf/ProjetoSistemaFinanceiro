@@ -1,8 +1,8 @@
 package br.com.uniesp.financeiro.infra.security;
 
+
 import br.com.uniesp.financeiro.entity.Usuario;
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Date;
 
 @Service
 public class TokenService {
@@ -33,7 +32,7 @@ public class TokenService {
         }
     }
 
-    public String getSubject(String tokenJWT){
+    public String getSubject(String tokenJWT) {
         try {
             var algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
@@ -42,7 +41,7 @@ public class TokenService {
                     .verify(tokenJWT)
                     .getSubject();
         } catch (JWTVerificationException exception){
-            throw new RuntimeException("Token JWT inválido ou expirado");
+            throw exception;
         }
     }
 

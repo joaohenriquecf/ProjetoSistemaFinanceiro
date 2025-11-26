@@ -1,6 +1,7 @@
 package br.com.uniesp.financeiro.dto.request.lancamento;
 
 import br.com.uniesp.financeiro.dto.request.categoria.DadosVinculoCategoria;
+import br.com.uniesp.financeiro.dto.request.pessoa.DadosCadastroPessoa;
 import br.com.uniesp.financeiro.dto.request.pessoa.DadosVinculoPessoa;
 import br.com.uniesp.financeiro.enums.TipoLancamento;
 import jakarta.validation.constraints.NotBlank;
@@ -24,5 +25,5 @@ public record DadosCadastroLancamento(
         @NotNull
         DadosVinculoCategoria categoria,
         @NotNull
-        DadosVinculoPessoa pessoa) {
+        DadosCadastroPessoa pessoa) {
 }

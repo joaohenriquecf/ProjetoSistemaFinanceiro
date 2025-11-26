@@ -1,6 +1,8 @@
 package br.com.uniesp.financeiro.infra.security;
 
+
 import br.com.uniesp.financeiro.repository.UsuarioRepository;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,9 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 
 @Component
@@ -24,22 +26,34 @@ public class SecurityFilter extends OncePerRequestFilter {
 
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var tokenJWT = recuperarToken(request);
-        if(tokenJWT != null){
-            var subject = tokenService.getSubject(tokenJWT);
-            var usuario = repository.findByLogin(subject);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
-            var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        var tokenJWT = recuperarToken(request);
+
+        try {
+            if (tokenJWT != null) {
+                var subject = tokenService.getSubject(tokenJWT);
+                var usuario = repository.findByLogin(subject);
+
+                var authentication = new UsernamePasswordAuthenticationToken(
+                        usuario, null, usuario.getAuthorities()
+                );
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+
+            filterChain.doFilter(request, response);
+
+        } catch (JWTVerificationException e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token inválido ou expirado");
         }
-        filterChain.doFilter(request,response);
     }
 
     private String recuperarToken(HttpServletRequest request) {
         var authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null) {
-            return authorizationHeader.replace("Bearer ", "");
+        if (authorizationHeader != null && authorizationHeader.toLowerCase().startsWith("bearer ")) {
+            return authorizationHeader.substring(7).trim();
         }
         return null;
     }

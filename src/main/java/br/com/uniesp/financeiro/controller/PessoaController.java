@@ -7,13 +7,14 @@ import br.com.uniesp.financeiro.dto.response.pessoa.DadosListagemPessoa;
 import br.com.uniesp.financeiro.entity.Pessoa;
 import br.com.uniesp.financeiro.repository.PessoaRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import jakarta.transaction.Transactional;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -23,30 +24,29 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class PessoaController {
 
     @Autowired
-    private PessoaRepository pessoaRepository;
-
+    private PessoaRepository repository;
 
     @PostMapping
     @Transactional
-    public ResponseEntity Cadastrar(@RequestBody @Valid DadosCadastroPessoa dados, UriComponentsBuilder uriBuilder){
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroPessoa dados, UriComponentsBuilder uriBuilder){
         var pessoa = new Pessoa(dados);
-        pessoaRepository.save(pessoa);
-        var uri = uriBuilder.path("/pessoas/ {id}").buildAndExpand(pessoa.getId()).toUri();
+        repository.save(pessoa);
+        var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoa.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoPessoa(pessoa));
     }
 
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemPessoa>> Listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
-        var page = pessoaRepository.findAllByAtivoTrue(paginacao).map(DadosListagemPessoa::new);
+    public ResponseEntity<Page<DadosListagemPessoa>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
+        var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemPessoa::new);
         return ResponseEntity.ok(page);
     }
 
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity Atualizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaoPessoa dados){
-        var pessoa = pessoaRepository.getReferenceById((id));
+    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaoPessoa dados){
+        var pessoa = repository.getReferenceById((id));
         pessoa.atualizarInformacoes(dados);
         return ResponseEntity.ok(new DadosDetalhamentoPessoa(pessoa));
     }
@@ -54,8 +54,8 @@ public class PessoaController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity Deletar(@PathVariable Long id){
-        var pessoa = pessoaRepository.getReferenceById(id);
+    public ResponseEntity deletar(@PathVariable Long id){
+        var pessoa = repository.getReferenceById(id);
         pessoa.deletar();
         return ResponseEntity.noContent().build();
     }
@@ -63,7 +63,7 @@ public class PessoaController {
 
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id) {
-        var pessoa = pessoaRepository.getReferenceById(id);
+        var pessoa = repository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhamentoPessoa(pessoa));
     }
 

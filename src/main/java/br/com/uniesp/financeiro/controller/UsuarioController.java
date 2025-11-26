@@ -1,7 +1,7 @@
 package br.com.uniesp.financeiro.controller;
 
 import br.com.uniesp.financeiro.dto.request.usuario.DadosCadastroUsuario;
-import br.com.uniesp.financeiro.dto.request.usuario.DadosDetalhamentoUsuario;
+import br.com.uniesp.financeiro.dto.response.usuario.DadosDetalhamentoUsuario;
 import br.com.uniesp.financeiro.entity.Usuario;
 import br.com.uniesp.financeiro.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+
 @RestController
 @RequestMapping("cadastros")
 public class UsuarioController {
@@ -27,16 +28,18 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastro(@RequestBody @Valid DadosCadastroUsuario dados, UriComponentsBuilder uriBuilder){
-        if (repository.findByLogin(dados.login()) != null){
+    public ResponseEntity cadastro(@RequestBody @Valid DadosCadastroUsuario dados,
+                                   UriComponentsBuilder uriBuilder) {
+        if (repository.findByLogin(dados.login()) != null) {
             return ResponseEntity.badRequest().body("Login já cadastrado!");
         }
         var encryptedPassword = passwordEncoder.encode(dados.senha());
         var usuario = new Usuario(dados.login(), encryptedPassword);
         repository.save(usuario);
-
         var uri = uriBuilder.path("/cadastros/{id}")
-                .buildAndExpand(usuario.getId()).toUri();
+                .buildAndExpand(usuario.getId())
+                .toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoUsuario(usuario));
     }
 }
+
